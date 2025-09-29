@@ -20,32 +20,59 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((project) => (
-              <div key={project} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    Project {project}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    A brief description of this amazing project and the technologies used to build it.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">React</span>
-                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Node.js</span>
-                    <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">MongoDB</span>
-                  </div>
-                  <div className="flex space-x-4">
-                    <a href="#" className="text-blue-600 hover:text-blue-800 font-medium">
-                      Live Demo
-                    </a>
-                    <a href="#" className="text-gray-600 hover:text-gray-800 font-medium">
-                      GitHub
-                    </a>
-                  </div>
+            {/* Portfolio */}
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 bg-gradient-to-br from-blue-500 to-indigo-600"></div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">CengizEkmekciPortfolio</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">React + TypeScript + Tailwind ile kişisel portföy. Vercel üzerinde yayınlandı.</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">React</span>
+                  <span className="bg-sky-100 text-sky-800 px-2 py-1 rounded text-sm">TypeScript</span>
+                  <span className="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-sm">Vercel</span>
+                </div>
+                <div className="flex space-x-4">
+                  <a href="https://cengiz-ekmekci-portfolio.vercel.app/" className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 font-medium">Live Demo</a>
+                  <a href="https://github.com/Cengizek/CengizEkmekciPortfolio" className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium">GitHub</a>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* YUMMY */}
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 bg-gradient-to-br from-rose-500 to-orange-500"></div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">YUMMY — E‑commerce (.NET Blazor)</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">Stripe entegrasyonlu .NET Blazor e‑ticaret uygulaması.</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">.NET</span>
+                  <span className="bg-fuchsia-100 text-fuchsia-800 px-2 py-1 rounded text-sm">Blazor</span>
+                  <span className="bg-slate-100 text-slate-800 px-2 py-1 rounded text-sm">SQL Server</span>
+                </div>
+                <div className="flex space-x-4">
+                  <a href="#" className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 font-medium">Live Demo</a>
+                  <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium">GitHub</a>
+                </div>
+              </div>
+            </div>
+
+            {/* MANGO */}
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 bg-gradient-to-br from-emerald-500 to-teal-500"></div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">MANGO — Food Ordering (.NET Web API)</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">.NET Web API ve SQL Server ile sipariş uygulaması.</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">.NET Web API</span>
+                  <span className="bg-slate-100 text-slate-800 px-2 py-1 rounded text-sm">SQL Server</span>
+                  <span className="bg-amber-100 text-amber-800 px-2 py-1 rounded text-sm">Stripe</span>
+                </div>
+                <div className="flex space-x-4">
+                  <a href="#" className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 font-medium">Live Demo</a>
+                  <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium">GitHub</a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="text-center mt-12">
