@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
   function Projects() {
   // simple fade/slide classes
   const cardHover = "hover:shadow-2xl hover:-translate-y-1 transition-all duration-300";
@@ -38,6 +39,75 @@
     
   ];
 
+  // ---- Dynamic GitHub repos ----
+  type Repo = {
+    id: number;
+    name: string;
+    html_url: string;
+    description: string | null;
+    language: string | null;
+    topics?: string[];
+    homepage?: string | null;
+  };
+
+  const [repos, setRepos] = useState<Repo[]>([]);
+  const [loadingRepos, setLoadingRepos] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function load() {
+      try {
+        setLoadingRepos(true);
+        const resp = await fetch(
+          "https://api.github.com/users/Cengizek/repos?per_page=100&sort=updated",
+          {
+            headers: {
+              Accept: "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+            },
+          }
+        );
+        if (!resp.ok) throw new Error("Failed to fetch repos");
+        const data = (await resp.json()) as Repo[];
+        if (isMounted) setRepos(data);
+      } catch {
+        if (isMounted) setRepos([]);
+      } finally {
+        if (isMounted) setLoadingRepos(false);
+      }
+    }
+    load();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const dotnetRepos = useMemo(
+    () =>
+      repos.filter((r) => {
+        const text = `${r.name} ${r.description ?? ""}`.toLowerCase();
+        const hasTopic = (r.topics || []).some((t) =>
+          ["dotnet", "csharp", "blazor"].includes(t.toLowerCase())
+        );
+        return (
+          hasTopic ||
+          text.includes(".net") ||
+          text.includes("dotnet") ||
+          text.includes("blazor") ||
+          (r.language || "").toLowerCase() === "c#"
+        );
+      }),
+    [repos]
+  );
+
+  const otherRepos = useMemo(
+    () =>
+      repos
+        .filter((r) => !dotnetRepos.some((d) => d.id === r.id))
+        .slice(0, 18),
+    [repos, dotnetRepos]
+  );
+
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
 
@@ -55,7 +125,7 @@
           </p>
         </div>
 
-        {/* Featured Projects */}
+        {/* Featured Projects (curated) */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Projects</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -106,54 +176,49 @@
           </div>
         </div>
 
-        {/* Other Projects */}
+        {/* .NET / Blazor from GitHub */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">.NET & Blazor Repositories</h2>
+          {loadingRepos ? (
+            <p className="text-gray-600">Loading repositories…</p>
+          ) : dotnetRepos.length === 0 ? (
+            <p className="text-gray-600">No .NET or Blazor repositories found yet.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {dotnetRepos.map((repo) => (
+                <div key={repo.id} className={`bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group ${cardHover}`}>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{repo.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+                      {repo.description || "No description provided."}
+                    </p>
+                    <div className="flex space-x-3">
+                      {repo.homepage ? (
+                        <a href={repo.homepage} className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 dark:hover:text-indigo-300 font-medium text-sm">Live Demo</a>
+                      ) : null}
+                      <a href={repo.html_url} className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium text-sm">GitHub</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Other GitHub repos */}
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Other Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {otherProjects.map((project) => (
+            {otherRepos.map((repo) => (
               <div key={project.id} className={`bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group ${cardHover}`}>
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech, index) => (
-                      <span
-                        key={index}
-                        className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-2 py-1 rounded text-xs font-medium">
-                        +{project.technologies.length - 3} more
-                      </span>
-                    )}
-                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{repo.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">{repo.description || "No description provided."}</p>
                   <div className="flex space-x-3">
-                    <a
-                      href={project.liveUrl}
-                      className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 dark:hover:text-indigo-300 font-medium text-sm"
-                    >
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium text-sm"
-                    >
-                      GitHub
-                    </a>
+                    {repo.homepage ? (
+                      <a href={repo.homepage} className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 dark:hover:text-indigo-300 font-medium text-sm">Live Demo</a>
+                    ) : null}
+                    <a href={repo.html_url} className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium text-sm">GitHub</a>
                   </div>
                 </div>
               </div>
