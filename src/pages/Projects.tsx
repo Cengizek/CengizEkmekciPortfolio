@@ -26,6 +26,28 @@ import { useEffect, useMemo, useState } from "react";
       period: "2024"
     },
     {
+      id: 4,
+      title: "YUMMY — E‑commerce (.NET Blazor)",
+      description: "E‑commerce app with Stripe integration built using .NET Blazor and SQL Server.",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
+      technologies: [".NET", "Blazor", "SQL Server", "Stripe"],
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true,
+      period: "2025"
+    },
+    {
+      id: 5,
+      title: "MANGO — Food Ordering (.NET Web API)",
+      description: "Full‑stack food ordering platform using .NET Web API and SQL Server.",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=500&h=300&fit=crop",
+      technologies: [".NET Web API", "SQL Server", "Visual Studio"],
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true,
+      period: "2025"
+    },
+    {
       id: 3,
       title: "School Management Backend",
       description: "Backend features for a school management system using Java Spring Boot with JPA/Hibernate and Spring Security.",
@@ -210,7 +232,7 @@ import { useEffect, useMemo, useState } from "react";
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Other Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherRepos.map((repo) => (
-              <div key={project.id} className={`bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group ${cardHover}`}>
+              <div key={repo.id} className={`bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group ${cardHover}`}>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{repo.name}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">{repo.description || "No description provided."}</p>
