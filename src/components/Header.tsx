@@ -24,7 +24,7 @@ function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-indigo-400 transition-colors">
-            Portfolio
+            Cengiz Ekmekçi
           </Link>
           
           <nav className="hidden md:flex space-x-8">
