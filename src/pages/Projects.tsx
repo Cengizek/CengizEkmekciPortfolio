@@ -1,49 +1,41 @@
   function Projects() {
+  // simple fade/slide classes
+  const cardHover = "hover:shadow-2xl hover:-translate-y-1 transition-all duration-300";
   const projects = [
     {
       id: 1,
-      title: "MANGO - Food Ordering Platform",
-      description: "A full-stack web application that allows users to place food orders. Developed using .NET Web API with Visual Studio 2022 as the primary development environment, and SQL Server Management Studio for robust database management.",
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=500&h=300&fit=crop",
-      technologies: [".NET Web API", "Visual Studio 2022", "SQL Server", "Database Management"],
-      liveUrl: "#",
-      githubUrl: "#",
+      title: "CengizEkmekciPortfolio",
+      description: "My personal portfolio built with React, TypeScript, Vite and Tailwind CSS. Deployed on Vercel.",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop",
+      technologies: ["React", "TypeScript", "Vite", "Tailwind", "Vercel"],
+      liveUrl: "https://cengiz-ekmekci-portfolio.vercel.app/",
+      githubUrl: "https://github.com/Cengizek/CengizEkmekciPortfolio",
       featured: true,
-      period: "April 2025 - June 2025"
+      period: "2025"
     },
     {
       id: 2,
-      title: "YUMMY - E-commerce Platform",
-      description: "A comprehensive full-stack e-commerce application developed using .NET Blazor with Visual Studio 2022. Features integrated payment gateway via Stripe platform and SQL Server Management Studio for database management.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-      technologies: [".NET Blazor", "Visual Studio 2022", "SQL Server", "Stripe", "Payment Integration"],
+      title: "HAIRCUTTERMS",
+      description: "A comprehensive barber shop website built as a full‑stack React project with a team of four.",
+      image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500&h=300&fit=crop",
+      technologies: ["React", "JavaScript", "Team Collaboration"],
       liveUrl: "#",
       githubUrl: "#",
       featured: true,
-      period: "March 2025 - May 2025"
+      period: "2024"
     },
     {
       id: 3,
-      title: "HAIRCUTTERMS - Barber Shop Website",
-      description: "A full-stack React project developed collaboratively with three teammates for a Software Engineering course. The comprehensive barber shop website was completed over approximately 100-120 days, featuring various functionalities.",
-      image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500&h=300&fit=crop",
-      technologies: ["React", "JavaScript", "Team Collaboration", "Full-Stack Development"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false,
-      period: "April 2024 - June 2024"
-    },
-    {
-      id: 4,
-      title: "School Management System",
-      description: "Backend functionalities for a school management site developed during internship at SMARTERA. Implemented using Java Spring Boot with core features like user authentication, CRUD operations, and secure data handling.",
+      title: "School Management Backend",
+      description: "Backend features for a school management system using Java Spring Boot with JPA/Hibernate and Spring Security.",
       image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=500&h=300&fit=crop",
-      technologies: ["Java", "Spring Boot", "JPA/Hibernate", "Spring Security", "Database Design"],
+      technologies: ["Java", "Spring Boot", "JPA/Hibernate", "Spring Security"],
       liveUrl: "#",
       githubUrl: "#",
       featured: false,
-      period: "July 2025 - August 2025"
-    }
+      period: "2025"
+    },
+    
   ];
 
   const featuredProjects = projects.filter(project => project.featured);
@@ -68,7 +60,7 @@
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Projects</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {featuredProjects.map((project) => (
-              <div key={project.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+              <div key={project.id} className={`bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group ${cardHover}`}>
                 <div className="relative overflow-hidden">
                   <img 
                     src={project.image} 
@@ -78,17 +70,17 @@
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                        className="bg-blue-100 dark:bg-indigo-900/40 text-blue-800 dark:text-indigo-200 px-3 py-1 rounded-full text-sm font-medium"
                       >
                         {tech}
                       </span>
@@ -103,7 +95,7 @@
                     </a>
                     <a
                       href={project.githubUrl}
-                      className="border-2 border-gray-300 text-gray-700 px-6 py-2 rounded-lg font-medium hover:border-gray-400 hover:text-gray-900 transition-colors"
+                      className="border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-6 py-2 rounded-lg font-medium hover:border-gray-400 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-white transition-colors"
                     >
                       GitHub
                     </a>
@@ -119,7 +111,7 @@
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Other Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherProjects.map((project) => (
-              <div key={project.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+              <div key={project.id} className={`bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden group ${cardHover}`}>
                 <div className="relative overflow-hidden">
                   <img 
                     src={project.image} 
@@ -128,23 +120,23 @@
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech, index) => (
                       <span
                         key={index}
-                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium"
+                        className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-2 py-1 rounded text-xs font-medium"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
+                      <span className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-2 py-1 rounded text-xs font-medium">
                         +{project.technologies.length - 3} more
                       </span>
                     )}
@@ -152,13 +144,13 @@
                   <div className="flex space-x-3">
                     <a
                       href={project.liveUrl}
-                      className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                      className="text-blue-600 dark:text-indigo-400 hover:text-blue-800 dark:hover:text-indigo-300 font-medium text-sm"
                     >
                       Live Demo
                     </a>
                     <a
                       href={project.githubUrl}
-                      className="text-gray-600 hover:text-gray-800 font-medium text-sm"
+                      className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium text-sm"
                     >
                       GitHub
                     </a>
