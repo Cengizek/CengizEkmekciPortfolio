@@ -34,8 +34,6 @@ function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Contact Info</h3>
             <div className="space-y-2 text-gray-600 dark:text-gray-300">
               <p>📧 ekmekcicengiz64@gmail.com</p>
-              <p>📱 +90 543 527 0221</p>
-              <p>📍 Aydın, Türkiye</p>
             </div>
           </div>
         </div>
